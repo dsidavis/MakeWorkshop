@@ -32,3 +32,14 @@ Issuing make causes fig1.png and fig2.png to be updated
 as these depend on setup.R
 
 
+
+# Change_mkData.R
+
+So the data need to be recreated to change the range of x.
+So we do this, add meaningful/detectable noise via the rexp.
+We undo the change in setup.R by commenting out the rnorm() addition.
+
+Now mkData.R and setup.R have changed.
+So this should regenerate data.rds first and then run fig1.R and fig2.R
+
+
