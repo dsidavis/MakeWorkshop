@@ -1,0 +1,49 @@
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+
+\section{Introduction}
+This illustrates how Make works.
+This paper is a \LaTex{} document
+with a main/master file named paper.tex.
+This file displays a PNG file, fig1.png.
+
+fig1.png is created via an R script named fig1.R.
+(The names don't have to be the same, but are to help understand.)
+So fig1.png depends on fig1.R.
+
+The code in fig1.R creates the plot, but first runs (source()) the code
+in setup.R.
+So fig1.R depends on setup.R.
+
+In some cases, we don't  indicate the implicit dependencies.
+But in this case we do.
+fig1.png depends on fig1.R and setup.R.
+
+\begin{verbatim}
+fig1.png: fig1.R setup.R
+
+\end{verbatim}
+
+If we wrote
+\begin{verbatim}
+fig1.png: fig1.R 
+
+fig1.R: setup.R
+\end{verbatim}
+this would mean that fig1.R would need to be regenerated when setup.R
+was changed.
+But fig1.R doesn't need to be regenerated. That is something we write.
+It is just that fig1.png needs to be updated when either fig1.R or setup.R change.
+
+ 
+
+\includegraphics{fig1.png}
+
+\input{part2.tex}
+
+
+
+
+\end{document}
+
