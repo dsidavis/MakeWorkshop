@@ -1,3 +1,5 @@
+RSCRIPT=/Users/duncan/Projects/R/R-tmp/build2/bin/Rscript
+
 paper.pdf:
 
 %.pdf: %.tex
@@ -5,13 +7,13 @@ paper.pdf:
 
 paper.pdf: paper.tex fig1.png fig2.png
 
-fig%.png: fig%.R setup.R
-	Rscript $<
+fig%.png: fig%.R setup.R data.rds
+	$(RSCRIPT) $<
 
 #fig1.R fig2.R:   setup.R
 
 data.rds: mkData.R
-	Rscript $<
+	$(RSCRIPT) $<
 
 
 distclean:
