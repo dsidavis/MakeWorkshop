@@ -5,7 +5,7 @@ paper.pdf:
 
 paper.pdf: paper.tex fig1.png fig2.png
 
-fig%.png: fig%.R setup.R
+fig%.png: fig%.R setup.R data.rds
 	Rscript $<
 
 #fig1.R fig2.R:   setup.R
