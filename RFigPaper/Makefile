@@ -5,7 +5,7 @@ paper.pdf:
 %.pdf: %.tex
 	pdflatex $*
 
-paper.pdf: paper.tex fig1.png fig2.png
+paper.pdf: paper.tex fig1.png fig2.png part2.tex
 
 fig%.png: fig%.R setup.R data.rds
 	$(RSCRIPT) $<

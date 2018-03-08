@@ -43,3 +43,21 @@ Now mkData.R and setup.R have changed.
 So this should regenerate data.rds first and then run fig1.R and fig2.R
 
 
+
+# Update_part2.tex
+
+We update the contents of the part2.tex file.
+This should only update paper.pdf when we run make.
+
+When we do this however, paper.pdf appears to be up-to-date.
+This is because we have not added the dependency for paper.pdf
+on part2.tex, just paper.tex and the PNG files.
+
+So we add this dependency to the Makefile
+\begin{verbatim}
+paper.pdf: paper.tex fig1.png fig2.png part2.tex
+\end{verbatim}
+and rerun make.
+This triggers the creation of paper.pdf via the rule that calls pdflatex.
+
+
