@@ -1,0 +1,46 @@
+
+SampleBallads_%.tar.bz2: SAMPLE_FILES_%
+	tar jcf $@ -T $^
+
+# This is semi-fake for now. Just to illustrate how we can 
+# make the Makefile file smarter and more programmatic/auto-calculating.
+SampleBallads_%.tar.gz: SAMPLE_FILES_%
+	echo "tar jcf $@ -T $^"
+	touch $@
+
+
+# We explicitly enumerate all of the targets. We have to make this correspond 
+# to the files SAMPLE_FILES_1...... 9
+# We could generate the list in, e.g., R. However, if we add or delete some, 
+# we won't know about these. So it would be good to calculate it programmatically.
+all: SampleBallads_1.tar.bz2 SampleBallads_2.tar.bz2 SampleBallads_3.tar.bz2  \
+     SampleBallads_4.tar.bz2 SampleBallads_5.tar.bz2 SampleBallads_6.tar.bz2 \
+     SampleBallads_7.tar.bz2 SampleBallads_8.tar.bz2 SampleBallads_9.tar.bz2 
+
+# Programmatic computation of targets
+# Write the list out manually
+XX=1 2 3 4 5 6 7 8 9
+# Compute the list via the shell
+XX=$(shell echo {1..9})
+# With the list, we can create the target output files
+YY=$(patsubst %,SampleBallads_%.tar.gz, $(XX))
+
+
+# We still have to know the number - 9.
+# We can compute this.
+N=$(shell ls -1 SAMPLE_FILES_* | wc -l)
+XXX=$(shell echo {1..$(N)})
+YYY=$(patsubst %,SampleBallads_%.tar.gz, $(XX))
+
+s:
+	echo "$(YY)"
+	echo "2nd version: $(YYY)
+
+yy: $(YY)
+
+
+# This is more terse, but we have to tell it how many iterations.
+# Note this doesn't compute tar jcf for each .tar.bz2 target directly.
+# Instead it calls make so that if it doesn't need to be rebuilt, it isn't
+tars:
+	for i in {1..9} ; do make SampleBallads_$${i}.tar.bz2 ; done

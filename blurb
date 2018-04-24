@@ -1,0 +1,8 @@
+Make, Shell scripting, Autoconf, CMake and Portability
+
+This is smorgasbord of somewhat related topics. We’ll talk about
+writing shell scripts to automate tasks and for use in Makefiles.
+We’ll talk about Make - what it is used for, the essential ideas,
+details of writing Makefiles for different projects.  We’ll also talk
+about the role of autoconf and cmake and how these are used to create
+portable projects and software.
